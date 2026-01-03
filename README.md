@@ -2,7 +2,7 @@
 
 A modern single-page portfolio website featuring a dark cosmic theme with smooth GSAP scroll animations.
 
-🔗 **Live Demo:** [kurtianbernaldez.github.io](https://kurtianbernaldez.github.io) *(update with your actual URL)*
+🔗 **Live Demo:** [kurtianbernaldez.github.io/dev-portfolio](https://kurtianbernaldez.github.io/dev-portfolio)
 
 ![Portfolio Preview](images/hero-bg.jpg)
 
@@ -35,7 +35,7 @@ A modern single-page portfolio website featuring a dark cosmic theme with smooth
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git clone https://github.com/kurtianbernaldez/dev-portfolio.git
 
 # Open in browser
 open index.html
