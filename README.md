@@ -2,7 +2,7 @@
 
 Hi! I'm **Kurt Ian G. Bernaldez**, an Information Technology graduate with years of experience in **Web Development, Software Development, UI Design, and System Administration**. I have a strong background in building responsive, user-centric applications using **ReactJS, Bootstrap, WordPress, and Firebase**.
 
-🌐 **Portfolio:** [kurtianbernaldez.github.io/dev-portfolio](https://kurtianbernaldez.github.io/dev-portfolio)
+🌐 **Portfolio:** [kurtian.dev](https://kurtian.dev)
 
 ---
 
@@ -14,31 +14,61 @@ Hi! I'm **Kurt Ian G. Bernaldez**, an Information Technology graduate with years
 
 ## 📌 Featured Projects
 
-### 1. SSGC Group Website Redesign
-🔗 [Live Site](https://ssgc.group/)  
-🛠 **Tech Stack:** WordPress, HTML, CSS, JavaScript
+### A&G POS & Inventory Management System
+🛠 **Tech Stack:** Next.js 16, React 19, TypeScript, Node.js, PostgreSQL
 
-Led a full website revision at **SSGC Group**, improving UI/UX, responsiveness, and SEO. Redesigned the layout for a modern experience, optimized performance, enhanced mobile responsiveness, and implemented custom WordPress features.
+A comprehensive full-stack POS and inventory management system with multi-instance architecture, secure authentication, and advanced business modules including sales, purchases, and analytics.
 
 ---
 
-### 2. Enomatics Wine Dispensing Website
+### TeaNuma
+🔗 [Live Site](https://teanuma.com/)  
+🛠 **Tech Stack:** WordPress, Elementor, PHP, WooCommerce, Paid Memberships Pro
+
+An online therapy marketplace platform with custom theme extensions, therapist/client profiles, subscription management, and messaging features.
+
+---
+
+### DateVoo
+🛠 **Tech Stack:** WordPress, WooCommerce, Paid Memberships Pro
+
+A comprehensive dating platform with advanced membership systems, multi-tier subscriptions, and custom user verification workflows.
+
+---
+
+### Social Link Website
+🔗 [Live Site](https://wetsoggy.42web.io/?i=1)  
+🛠 **Tech Stack:** WordPress, PHP, CSS, JavaScript, SEO
+
+A simple, clean social link website built for an artist, serving as a central hub for their online profiles, links, and contact information.
+
+---
+
+### FoodPrep Pro
+🔗 [GitHub](https://github.com/kurtianbernaldez/FoodPrepPro) | [Live Site](https://orderup-14fbd.web.app/)  
+🛠 **Tech Stack:** React, Firebase, PayMongo
+
+Led the end-to-end development of an Admin and Staff management portal for a local food service startup, with real-time product listing and order tracking.
+
+---
+
+### SSGC Group Website Redesign
+🔗 [Live Site](https://ssgc.group/)  
+🛠 **Tech Stack:** WordPress, PHP, CSS, JavaScript, SEO
+
+Redesigned and optimized the company WordPress website for brand presentation, SEO, and better user interaction.
+
+---
+
+### Enomatics Wine Dispensing Website
 🔗 [Live Demo](http://enomaticsgid.42web.io/)  
 🛠 **Tech Stack:** HTML, CSS, JavaScript
 
-Designed and developed the official website for **Enomatics**, a wine dispensing company from Italy distributed by SSGC in Singapore and Indonesia. Created an elegant UI with product showcases and optimized layout.
+Designed and developed the official website for **Enomatics**, a wine dispensing company from Italy distributed by SSGC in Singapore and Indonesia.
 
 ---
 
-### 3. FoodPrepPro System
-🔗 [GitHub](https://github.com/kurtianbernaldez/FoodPrepPro) | [Live Site](https://orderup-14fbd.web.app/)  
-🛠 **Tech Stack:** JavaScript, Firebase, HTML, CSS
-
-A food ordering system with admin/staff dashboard, real-time product listing and order tracking, and user account management with full CRUD operations.
-
----
-
-### 4. Recipe Assistant
+### Recipe Assistant
 🔗 [GitHub](https://github.com/kurtianbernaldez/RecipeAssistant)  
 🛠 **Tech Stack:** Streamlit, Python
 
@@ -46,8 +76,13 @@ A recipe discovery app with advanced filtering for diets, meal types, ingredient
 
 ---
 
-### 5. UI/UX Design Projects (Figma)
-🔗 [RSV4 Landing Page](https://www.figma.com/design/qpyJOoWdomsfnEDmQfnh3H/RSV4-Landing-Page?node-id=0-1&m=dev) | [A&G Roof Steel Builders](https://www.figma.com/design/pAxwGjpX472MQcY1aqB6F5/A-G-Roof-Steel-Builders-Draft-1?node-id=0-1&m=dev) | [Ka'Chava Redesign](https://www.figma.com/design/uK1K3j7dJtIgjfFszCb6IS/Ka-Chava-redesign?node-id=0-1&m=dev)
+## 🎨 UI/UX Design (Figma)
+
+| Project | Link |
+|---------|------|
+| Aprilia RSV4 Factory 1100 - Landing Page | [View on Figma](https://www.figma.com/design/qpyJOoWdomsfnEDmQfnh3H/RSV4-Landing-Page?node-id=0-1&m=dev) |
+| Ka'Chava - Homepage Redesign | [View on Figma](https://www.figma.com/design/uK1K3j7dJtIgjfFszCb6IS/Ka-Chava-redesign?node-id=0-1&m=dev) |
+| A&G Roof Steel Builders Draft | [View on Figma](https://www.figma.com/design/pAxwGjpX472MQcY1aqB6F5/A-G-Roof-Steel-Builders-Draft-1?node-id=0-1&m=dev) |
 
 ---
 
@@ -55,18 +90,9 @@ A recipe discovery app with advanced filtering for diets, meal types, ingredient
 
 A modern single-page portfolio website featuring a dark cosmic theme with smooth GSAP scroll animations.
 
-### Features
-- **Dark Cosmic Theme** - Elegant dark design with nebula-inspired backgrounds
-- **GSAP Animations** - Smooth scroll-triggered animations and transitions
-- **Responsive Design** - Optimized for desktop, tablet, and mobile
-- **Glassmorphism Effects** - Modern frosted glass UI elements
-- **Business Card Contact** - Unique landscape business card layout
+**Features:** Dark Cosmic Theme • GSAP Animations • Responsive Design • Glassmorphism Effects • Business Card Contact
 
-### Built With
-- HTML5 & CSS3 (Grid, Flexbox, Custom Properties)
-- Vanilla JavaScript
-- [GSAP](https://greensock.com/gsap/) with ScrollTrigger
-- Google Fonts
+**Built With:** HTML5 & CSS3 • Vanilla JavaScript • [GSAP](https://greensock.com/gsap/) with ScrollTrigger • Google Fonts
 
 ---
 
