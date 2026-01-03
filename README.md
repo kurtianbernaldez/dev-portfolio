@@ -1,71 +1,64 @@
-# Portfolio Website - Kurt Ian G. Bernaldez
+# Kurt Ian Bernaldez - Portfolio
 
-A stunning single-page portfolio website featuring a dark cosmic theme with GSAP scroll animations.
+A modern single-page portfolio website featuring a dark cosmic theme with smooth GSAP scroll animations.
 
-## Features
+🔗 **Live Demo:** [kurtianbernaldez.github.io](https://kurtianbernaldez.github.io) *(update with your actual URL)*
 
-- 🎨 **Dark Cosmic Theme** - Beautiful dark theme matching the nebula hero image
-- ✨ **GSAP Animations** - Smooth scroll-triggered animations throughout
-- 📱 **Fully Responsive** - Works seamlessly on desktop, tablet, and mobile
-- 🚀 **Modern Design** - Glass-morphism effects, gradients, and smooth transitions
-- 📄 **Single Page** - All sections in one scrollable page (100vh each)
+![Portfolio Preview](images/hero-bg.jpg)
 
-## Sections
+## ✨ Features
 
-1. **Hero** - Full-screen hero section with cosmic background
-2. **Projects** - Featured projects showcase (A&G POS, TeaNuma, DateVoo)
-3. **About** - Education, skills, and personal information
-4. **Tools** - Technologies organized by Frontend, Backend, and Databases
-5. **Contact** - Contact form and information
+- **Dark Cosmic Theme** - Elegant dark design with nebula-inspired backgrounds
+- **GSAP Animations** - Smooth scroll-triggered animations and transitions
+- **Responsive Design** - Optimized for desktop, tablet, and mobile
+- **Glassmorphism Effects** - Modern frosted glass UI elements
+- **Business Card Contact** - Unique landscape business card layout
 
-## Setup
+## 📂 Sections
 
-1. Add your hero background image to the `images/` directory as `hero-bg.jpg`
-   - Recommended size: 1920x1080 or larger
-   - This should be the cosmic nebula image you provided
+| Section | Description |
+|---------|-------------|
+| **Hero** | Full-screen intro with cosmic background |
+| **About** | Education, skills, and personal info |
+| **Featured Works** | Project showcase with mockup toggle |
+| **Tools** | Tech stack organized by category |
+| **Contact** | Business card style contact info |
 
-2. Optionally add:
-   - Profile photo to the About section (add to `images/` folder)
-   - Project screenshots (add to `images/` folder)
+## 🛠️ Built With
 
-3. Open `index.html` in your browser or serve it using a local server
-
-## Technologies Used
-
-- HTML5
-- CSS3 (Custom Properties, Grid, Flexbox)
+- HTML5 & CSS3 (Grid, Flexbox, Custom Properties)
 - Vanilla JavaScript
-- GSAP 3.12.5 (ScrollTrigger plugin)
-- Google Fonts (Inter)
+- [GSAP](https://greensock.com/gsap/) with ScrollTrigger
+- Google Fonts
 
-## Customization
+## 🚀 Quick Start
 
-All colors and styling are defined in CSS custom properties at the top of `styles/main.css`:
+```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
 
-```css
-:root {
-    --primary-dark: #0a0e27;
-    --secondary-dark: #1a1f3a;
-    --accent-blue: #1e40af;
-    --accent-teal: #06b6d4;
-    /* ... */
-}
+# Open in browser
+open index.html
 ```
 
-## Browser Support
+Or simply visit the live demo link above.
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+## 📁 Project Structure
 
-## Contact Form
+```
+├── index.html
+├── styles/
+│   └── main.css
+├── scripts/
+│   ├── main.js
+│   ├── animations.js
+│   └── projects.js
+└── images/
+    ├── projects/
+    │   └── mockups/
+    └── ...
+```
 
-The contact form is currently set up with client-side validation. To make it functional, you'll need to:
-1. Set up a backend endpoint to handle form submissions
-2. Update the form submission handler in `scripts/main.js`
+## 📄 License
 
-## License
-
-© 2025 Kurt Ian G. Bernaldez. All rights reserved.
-
+© 2025 Kurt Ian Bernaldez. All rights reserved.
