@@ -12,10 +12,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
-    <!-- Preload critical resources -->
-    <link rel="preload" as="style" href="styles/main.css?v=4">
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap">
-    <link rel="preload" as="image" href="images/hero-bg.webp">
+    <!-- Preload critical resources with high priority for LCP -->
+    <link rel="preload" as="style" href="styles/main.css?v=5">
+    <link rel="preload" as="image" href="images/hero-bg.webp" fetchpriority="high">
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" type="font/woff2" crossorigin>
     
     <!-- Critical CSS inline for above-the-fold content -->
     <style>
@@ -133,8 +133,9 @@
             font-weight: 700;
             margin-bottom: 1rem;
             color: var(--text-primary);
-            opacity: 0;
+            opacity: 1;
             white-space: nowrap;
+            will-change: opacity, transform;
         }
         .hero-title {
             font-size: clamp(1rem, 2.5vw, 1.25rem);
@@ -143,16 +144,18 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 1.5rem;
-            opacity: 0;
+            opacity: 1;
+            will-change: opacity, transform;
         }
         .hero-tagline {
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: var(--text-secondary);
             margin-bottom: 2.5rem;
-            opacity: 0;
+            opacity: 1;
             width: 60%;
             margin-left: auto;
             margin-right: auto;
+            will-change: opacity, transform;
         }
         @media (max-width: 968px) {
             .nav-menu {
@@ -172,8 +175,8 @@
     </style>
     
     <!-- Load non-critical CSS asynchronously (media="print" trick: loads without blocking, then applies to all) -->
-    <link rel="stylesheet" href="styles/main.css?v=4" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="styles/main.css?v=4"></noscript>
+    <link rel="stylesheet" href="styles/main.css?v=5" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles/main.css?v=5"></noscript>
     
     <!-- Load fonts asynchronously with font-display: swap -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -204,7 +207,7 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-background"></div>
-        <div class="hero-content">
+        <div class="hero-content" style="opacity: 1;">
             <h1 class="hero-name">Kurt Ian Bernaldez</h1>
             <h2 class="hero-title">Full-Stack Developer</h2>
             <p class="hero-tagline">I build clean, responsive frontends backed by reliable systems to drive growth and efficiency.</p>
