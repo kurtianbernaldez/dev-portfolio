@@ -1,29 +1,39 @@
 // Navigation functionality
+// Using defer attribute ensures DOM is ready when this executes
 const navbar = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
+// Safety check - elements should exist with defer, but just in case
+if (!navbar || !hamburger || !navMenu) {
+    console.warn('Navigation elements not found');
+}
+
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
+    if (navbar && window.scrollY > 50) {
         navbar.classList.add('scrolled');
-    } else {
+    } else if (navbar) {
         navbar.classList.remove('scrolled');
     }
 });
 
 // Mobile menu toggle
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+}
 
 // Close mobile menu when clicking on a link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+        if (hamburger && navMenu) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
     });
 });
 
@@ -63,7 +73,6 @@ heroButtons.forEach(btn => {
     });
 });
 
-
 // Active navigation link on scroll
 const sections = document.querySelectorAll('section[id]');
 
@@ -100,16 +109,15 @@ navLinks.forEach(link => {
 const bgImage = new Image();
 const hero = document.querySelector('.hero');
 if (hero) {
-    bgImage.src = 'images/hero-bg.jpg';
+    bgImage.src = 'images/hero-bg.webp';
     bgImage.onload = () => {
         // Force a reflow to ensure background renders behind navbar
-        hero.style.backgroundImage = `url('images/hero-bg.jpg')`;
+        hero.style.backgroundImage = `url('images/hero-bg.webp')`;
         // Trigger a repaint
         void hero.offsetHeight;
     };
     // If image is already cached, set it immediately
     if (bgImage.complete) {
-        hero.style.backgroundImage = `url('images/hero-bg.jpg')`;
+        hero.style.backgroundImage = `url('images/hero-bg.webp')`;
     }
 }
-
