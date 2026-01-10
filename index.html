@@ -170,11 +170,11 @@
         }
     </style>
     
-    <!-- Load non-critical CSS asynchronously (won't block render) -->
+    <!-- Load non-critical CSS asynchronously (media="print" trick: loads without blocking, then applies to all) -->
     <link rel="stylesheet" href="styles/main.css?v=4" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="styles/main.css?v=4"></noscript>
     
-    <!-- Load fonts asynchronously with font-display: swap (prevents invisible text) -->
+    <!-- Load fonts asynchronously with font-display: swap -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 </head>
