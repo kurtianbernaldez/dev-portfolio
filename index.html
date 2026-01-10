@@ -6,11 +6,177 @@
     <meta name="description" content="Kurt Ian G. Bernaldez - Full-Stack Web Developer Portfolio">
     <title>Kurt Ian Bernaldez | Full-Stack Web Developer</title>
     <link rel="icon" type="image/png" href="images/logo.png">
-    <link rel="stylesheet" href="styles/main.css?v=3">
+    
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" as="style" href="styles/main.css?v=4">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap">
     <link rel="preload" as="image" href="images/hero-bg.webp">
+    
+    <!-- Critical CSS inline for above-the-fold content -->
+    <style>
+        :root {
+            --primary-dark: #111111;
+            --secondary-dark: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #e5e7eb;
+            --text-muted: #9ca3af;
+            --container-max-width: 1200px;
+            --transition-base: 0.3s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: transparent;
+            border-bottom: 1px solid transparent;
+            transition: all var(--transition-base);
+        }
+        .nav-container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            height: 40px;
+        }
+        .logo-img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-base);
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--text-primary);
+            transition: width var(--transition-base);
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-primary);
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            transition: all var(--transition-base);
+            border-radius: 2px;
+        }
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: url('images/hero-bg.webp') center center no-repeat;
+            background-size: cover;
+            background-color: var(--primary-dark);
+            background-attachment: fixed;
+            background-position: center top;
+        }
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .hero-name {
+            font-size: clamp(2rem, 6vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            opacity: 0;
+            white-space: nowrap;
+        }
+        .hero-title {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+        }
+        .hero-tagline {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (max-width: 968px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(17, 17, 17, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: left var(--transition-base);
+                padding: 2rem 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .hamburger { display: flex; }
+        }
+    </style>
+    
+    <!-- Load non-critical CSS asynchronously (won't block render) -->
+    <link rel="stylesheet" href="styles/main.css?v=4" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles/main.css?v=4"></noscript>
+    
+    <!-- Load fonts asynchronously with font-display: swap (prevents invisible text) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 </head>
 <body>
     <!-- Navigation -->
