@@ -192,7 +192,7 @@ body {
     top: 0;
     min-height: 100vh;
     /* WordPress-style: background with fixed attachment on the section itself */
-    background: url('../images/hero-bg.jpg') center center no-repeat;
+    background: url('../images/hero-bg.webp') center center no-repeat;
     background-size: cover;
     background-color: var(--primary-dark);
     background-attachment: fixed;
@@ -507,7 +507,7 @@ body {
     min-height: 100vh;
     padding: 8rem 0;
     background: var(--primary-dark);
-    background-image: url('../images/bg-2.jpg');
+    background-image: url('../images/bg-2.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -779,7 +779,7 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 100vh;
     padding: 8rem 0;
     background: var(--secondary-dark);
-    background-image: url('../images/bg-1.jpg');
+    background-image: url('../images/bg-1.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1009,7 +1009,7 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 100vh;
     padding: 8rem 0;
     background: var(--primary-dark);
-    background-image: url('../images/bg-3.jpg');
+    background-image: url('../images/bg-3.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

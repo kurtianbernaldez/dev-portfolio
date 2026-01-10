@@ -2,42 +2,42 @@
 const projects = [
     {
         name: "A&G POS & Inventory Management System",
-        image: "images/projects/ag.png",
+        image: "images/projects/ag.webp",
         description: "A comprehensive full-stack POS and inventory management system with multi-instance architecture, secure authentication, and advanced business modules including sales, purchases, and analytics.",
         tech: ["Next.js 16", "React 19", "TypeScript", "Node.js", "PostgreSQL"],
         link: "" // Add your project URL here
     },
     {
         name: "TeaNuma",
-        image: "images/projects/teanuma.png",
+        image: "images/projects/teanuma.webp",
         description: "An online therapy marketplace platform with custom theme extensions, therapist/client profiles, subscription management, and messaging features.",
         tech: ["WordPress", "Elementor", "PHP", "WooCommerce", "Paid Memberships Pro"],
         link: "https://teanuma.com/" // Add your project URL here
     },
     {
         name: "DateVoo",
-        image: "images/projects/datevoo.png",
+        image: "images/projects/datevoo.webp",
         description: "A comprehensive dating platform with advanced membership systems, multi-tier subscriptions, and custom user verification workflows.",
         tech: ["WordPress", "WooCommerce", "Paid Memberships Pro"],
         link: "" // Add your project URL here
     },
     {
         name: "Social Link Website",
-        image: "images/projects/social-link.png",
+        image: "images/projects/social-link.webp",
         description: "A simple, clean social link website built for an artist, serving as a central hub for their online profiles, links, and contact information, making it easy for fans and collaborators to connect and stay in touch.",
         tech: ["WordPress", "PHP", "CSS", "JavaScript", "SEO"],
         link: "https://wetsoggy.42web.io/?i=1" // Add your project URL here
     },
     {
         name: "FoodPrep Pro",
-        image: "images/projects/foodprep.png",
+        image: "images/projects/foodprep.webp",
         description: "Led the end-to-end development of an Admin and Staff management portal for a local food service startup, streamlining workflows and significantly improving operational efficiency.",
         tech: ["React", "Firebase", "PayMongo"],
         link: "" // Add your project URL here
     },
     {
         name: "SSGC Group",
-        image: "images/projects/ssgc.png",
+        image: "images/projects/ssgc.webp",
         description: "Redesigned and optimized the company WordPress website for brand presentation, SEO, and better user interaction.",
         tech: ["WordPress", "PHP", "CSS", "JavaScript", "SEO"],
         link: "" // Add your project URL here
@@ -48,13 +48,13 @@ const projects = [
 const mockups = [
     {
         name: "Aprilia RSV4 Factory 1100 - Landing Page Mockup",
-        image: "images/projects/mockups/mockup-1.png",
+        image: "images/projects/mockups/mockup-1.webp",
         description: "A visually driven landing page mockup highlighting the performance and racing identity of the Aprilia RSV4 Factory 1100 through bold layouts and modern UI design.",
         link: "https://www.figma.com/design/qpyJOoWdomsfnEDmQfnh3H/RSV4-Landing-Page?node-id=0-1&t=IqPNbV1lEOuDc8Mv-1" 
     },
     {
         name: "Ka'Chava - Homepage Redesign",
-        image: "images/projects/mockups/mockup-2.png",
+        image: "images/projects/mockups/mockup-2.webp",
         description: "A homepage redesign concept focused on improving user experience, content clarity, and conversion through clean, modern design.",
         link: "https://www.figma.com/design/uK1K3j7dJtIgjfFszCb6IS/Ka-Chava-Redesign?node-id=0-1&t=lfhqPc9jXh352U9C-1" 
     }
