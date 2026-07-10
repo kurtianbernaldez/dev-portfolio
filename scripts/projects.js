@@ -8,18 +8,18 @@ const projects = [
         link: "" // Add your project URL here
     },
     {
-        name: "TeaNuma",
-        image: "images/projects/teanuma.webp",
-        description: "An online therapy marketplace platform with custom theme extensions, therapist/client profiles, subscription management, and messaging features.",
-        tech: ["WordPress", "Elementor", "PHP", "WooCommerce", "Paid Memberships Pro"],
-        link: "https://teanuma.com/" // Add your project URL here
+        name: "Propdesk",
+        image: "",
+        description: "A property management platform built to organize listings, inquiries, client records, and day-to-day real estate workflows in one streamlined workspace.",
+        tech: ["Laravel", "PHP", "MySQL", "JavaScript", "Bootstrap"],
+        link: ""
     },
     {
-        name: "DateVoo",
-        image: "images/projects/datevoo.webp",
-        description: "A comprehensive dating platform with advanced membership systems, multi-tier subscriptions, and custom user verification workflows.",
-        tech: ["WordPress", "WooCommerce", "Paid Memberships Pro"],
-        link: "" // Add your project URL here
+        name: "BridalGalleryCebu",
+        image: "",
+        description: "A bridal ecommerce and booking platform with product catalogs, package management, supplier workflows, checkout flows, and admin controls.",
+        tech: ["Laravel", "PHP", "MySQL", "Blade", "Tailwind CSS"],
+        link: ""
     },
     {
         name: "Social Link Website",
@@ -36,11 +36,11 @@ const projects = [
         link: "" // Add your project URL here
     },
     {
-        name: "SSGC Group",
-        image: "images/projects/ssgc.webp",
-        description: "Redesigned and optimized the company WordPress website for brand presentation, SEO, and better user interaction.",
-        tech: ["WordPress", "PHP", "CSS", "JavaScript", "SEO"],
-        link: "" // Add your project URL here
+        name: "Stamped",
+        image: "",
+        description: "A self-built product focused on digital stamping workflows, organized records, and a simple interface for managing document status and approvals.",
+        tech: ["Laravel", "PHP", "MySQL", "JavaScript", "Tailwind CSS"],
+        link: ""
     }
 ];
 
