@@ -9,14 +9,14 @@ const projects = [
     },
     {
         name: "Propdesk",
-        image: "",
+        image: "images/projects/propdesk.jpeg",
         description: "A property management platform built to organize listings, inquiries, client records, and day-to-day real estate workflows in one streamlined workspace.",
         tech: ["Laravel", "PHP", "MySQL", "JavaScript", "Bootstrap"],
         link: ""
     },
     {
         name: "BridalGalleryCebu",
-        image: "",
+        image: "images/projects/bridalgallery.jpeg",
         description: "A bridal ecommerce and booking platform with product catalogs, package management, supplier workflows, checkout flows, and admin controls.",
         tech: ["Laravel", "PHP", "MySQL", "Blade", "Tailwind CSS"],
         link: ""
@@ -37,7 +37,7 @@ const projects = [
     },
     {
         name: "Stamped",
-        image: "",
+        image: "images/projects/stamped.jpeg",
         description: "A self-built product focused on digital stamping workflows, organized records, and a simple interface for managing document status and approvals.",
         tech: ["Laravel", "PHP", "MySQL", "JavaScript", "Tailwind CSS"],
         link: ""
