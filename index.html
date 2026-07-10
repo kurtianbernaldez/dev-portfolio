@@ -13,25 +13,24 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
     <!-- Preload critical resources with high priority for LCP -->
-    <link rel="preload" as="style" href="styles/main.css?v=5">
+    <link rel="preload" as="style" href="styles/main.css?v=6">
     <link rel="preload" as="image" href="images/hero-bg.webp" fetchpriority="high">
-    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" type="font/woff2" crossorigin>
     
     <!-- Critical CSS inline for above-the-fold content -->
     <style>
         :root {
-            --primary-dark: #111111;
-            --secondary-dark: #1a1a1a;
+            --primary-dark: #07090f;
+            --secondary-dark: #0d111b;
             --text-primary: #ffffff;
-            --text-secondary: #e5e7eb;
-            --text-muted: #9ca3af;
+            --text-secondary: #d6dbe8;
+            --text-muted: #929bad;
             --container-max-width: 1200px;
             --transition-base: 0.3s ease;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'DM Sans', sans-serif;
             background-color: var(--primary-dark);
             color: var(--text-primary);
             line-height: 1.6;
@@ -114,8 +113,9 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            background: url('images/hero-bg.webp') center center no-repeat;
-            background-size: cover;
+            background:
+                linear-gradient(90deg, rgba(7, 9, 15, 0.88), rgba(7, 9, 15, 0.48)),
+                url('images/hero-bg.webp') center center / cover no-repeat;
             background-color: var(--primary-dark);
             background-attachment: fixed;
             background-position: center top;
@@ -174,48 +174,54 @@
         }
     </style>
     
-    <!-- Load non-critical CSS asynchronously (media="print" trick: loads without blocking, then applies to all) -->
-    <link rel="stylesheet" href="styles/main.css?v=5" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="styles/main.css?v=5"></noscript>
+    <link rel="stylesheet" href="styles/main.css?v=6">
     
     <!-- Load fonts asynchronously with font-display: swap -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <img src="images/logo.webp" alt="Logo" class="logo-img">
-            </div>
+            <a href="#home" class="nav-logo" aria-label="Kurt Ian Bernaldez, home">
+                <img src="images/logo.webp" alt="" class="logo-img" width="66" height="40">
+            </a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#tools" class="nav-link">Tools</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation" aria-controls="nav-menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-background"></div>
-        <div class="hero-content" style="opacity: 1;">
-            <h1 class="hero-name">Kurt Ian Bernaldez</h1>
-            <h2 class="hero-title">Full-Stack Developer</h2>
-            <p class="hero-tagline">I build clean, responsive frontends backed by reliable systems to drive growth and efficiency.</p>
-            <div class="button-container">
-                <a href="#contact" class="button-89" role="button">Contact Me</a>
-                <a href="#projects" class="button-89" role="button">View Works</a>
-            </div>
-            <div class="social-links">
+        <div class="hero-background" aria-hidden="true"></div>
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
+        <div class="hero-shell">
+            <div class="hero-content">
+                <p class="hero-kicker"><span class="status-dot"></span> Based in Cebu, Philippines</p>
+                <h1 class="hero-name">
+                    <span>Kurt Ian</span>
+                    <span class="hero-name-accent">Bernaldez.</span>
+                </h1>
+                <h2 class="hero-title">Full-Stack Developer <span>/ Digital Builder</span></h2>
+                <p class="hero-tagline">I build clear interfaces and dependable systems that turn complex workflows into useful digital products.</p>
+                <div class="button-container">
+                    <a href="#projects" class="button-89 button-primary">Explore my work</a>
+                    <a href="#contact" class="button-89 button-secondary">Start a conversation</a>
+                </div>
+                <div class="social-links" aria-label="Social profiles">
                 <a href="https://www.linkedin.com/in/kurt-ian-bernaldez-a79a5b2b5/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" fill="currentColor"/>
@@ -231,6 +237,48 @@
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="currentColor"/>
                     </svg>
                 </a>
+                </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="cube-stage">
+                    <span class="visual-corner visual-corner-tl"></span>
+                    <span class="visual-corner visual-corner-br"></span>
+                    <div class="cube-grid"></div>
+                    <div class="cube-object cube-object-main">
+                        <div class="cube cube-main">
+                            <span class="cube-face cube-front"><strong>KI</strong></span>
+                            <span class="cube-face cube-back"></span>
+                            <span class="cube-face cube-right"></span>
+                            <span class="cube-face cube-left"></span>
+                            <span class="cube-face cube-top"></span>
+                            <span class="cube-face cube-bottom"></span>
+                        </div>
+                    </div>
+                    <div class="cube-object cube-object-one">
+                        <div class="cube cube-small">
+                            <span class="cube-face cube-front"></span>
+                            <span class="cube-face cube-back"></span>
+                            <span class="cube-face cube-right"></span>
+                            <span class="cube-face cube-left"></span>
+                            <span class="cube-face cube-top"></span>
+                            <span class="cube-face cube-bottom"></span>
+                        </div>
+                    </div>
+                    <div class="cube-object cube-object-two">
+                        <div class="cube cube-tiny">
+                            <span class="cube-face cube-front"></span>
+                            <span class="cube-face cube-back"></span>
+                            <span class="cube-face cube-right"></span>
+                            <span class="cube-face cube-left"></span>
+                            <span class="cube-face cube-top"></span>
+                            <span class="cube-face cube-bottom"></span>
+                        </div>
+                    </div>
+                    <span class="cube-label cube-label-top">STRUCTURE / SYSTEM / UI</span>
+                    <span class="cube-label cube-label-side">THREE DIMENSIONS</span>
+                    <span class="code-chip code-chip-one">&lt;build /&gt;</span>
+                    <span class="code-chip code-chip-two">X / Y / Z</span>
+                </div>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -246,6 +294,7 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
+                    <p class="section-kicker">01 / Profile</p>
                     <h2 class="section-title">About Me</h2>
                     <p class="about-description">
                         I'm a full-stack web developer focused on building practical web products, ecommerce workflows, admin systems, and responsive interfaces with reliable backend architecture.
@@ -308,8 +357,9 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
+            <p class="section-kicker section-kicker-centered">02 / Selected output</p>
             <h2 class="section-title">Featured Works</h2>
-            <p class="work-description" style="text-align: center; color: var(--text-secondary); font-size: 1.1rem; margin-top: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <p class="work-description">
                 A showcase of projects and client work demonstrating my full-stack development expertise.
             </p>
             <div class="view-toggle-container">
@@ -327,6 +377,7 @@
     <section id="tools" class="tools">
         <div class="container">
             <div class="work-content">
+                <p class="section-kicker section-kicker-centered">03 / Technical range</p>
                 <h2 class="section-title">Tools I Use</h2>
                 <p class="work-description">The platforms and software that power my design and development process.</p>
             </div>
@@ -403,12 +454,13 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
+            <p class="section-kicker section-kicker-centered">04 / Let’s build</p>
             <h2 class="section-title">Get In Touch</h2>
             <div class="contact-content">
                 <div class="business-card">
                     <div class="card-left">
                         <div class="profile-image-placeholder">
-                            <img src="images/portrait.webp" alt="Kurt Ian Bernaldez" class="profile-image">
+                            <img src="images/portrait.webp" alt="Kurt Ian Bernaldez" class="profile-image" loading="lazy" decoding="async" width="160" height="160">
                         </div>
                     </div>
                     <div class="card-right">
@@ -481,7 +533,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Kurt Ian Bernaldez. All rights reserved.</p>
+            <p>&copy; 2026 Kurt Ian Bernaldez. All rights reserved.</p>
         </div>
     </footer>
 

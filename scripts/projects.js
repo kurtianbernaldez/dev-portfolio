@@ -65,14 +65,14 @@ const mockups = [
 let showMockups = false;
 
 // Function to generate project card HTML
-function generateProjectCard(project) {
+function generateProjectCard(project, index) {
     const techTags = project.tech.map(tech => 
         `<span class="tech-tag">${tech}</span>`
     ).join('');
 
     // Use image if provided, otherwise show placeholder
     const imageHTML = project.image 
-        ? `<img src="${project.image}" alt="${project.name}" class="project-img">`
+        ? `<img src="${project.image}" alt="${project.name} project preview" class="project-img" loading="lazy" decoding="async">`
         : `<div class="project-placeholder">Project Image</div>`;
 
     // Only show button if link exists
@@ -86,30 +86,34 @@ function generateProjectCard(project) {
         : '';
 
     return `
-        <div class="project-card">
-            <div class="project-image">
-                ${imageHTML}
-            </div>
-            <div class="project-content">
-                <h3 class="project-name">${project.name}</h3>
-                <div class="project-tech">
-                    ${techTags}
+        <article class="project-card" data-tilt-card>
+            <div class="project-card-inner">
+                <div class="project-image">
+                    ${imageHTML}
+                    <span class="project-index">${String(index + 1).padStart(2, '0')}</span>
+                    <span class="project-image-overlay"></span>
                 </div>
-                <p class="project-description">${project.description}</p>
-                <div class="project-footer">
-                    ${buttonHTML}
+                <div class="project-content">
+                    <h3 class="project-name">${project.name}</h3>
+                    <div class="project-tech">
+                        ${techTags}
+                    </div>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-footer">
+                        ${buttonHTML}
+                    </div>
                 </div>
             </div>
-        </div>
+        </article>
     `;
 }
 
 // Function to generate mockup card HTML
-function generateMockupCard(mockup) {
+function generateMockupCard(mockup, index) {
     // Always show a placeholder div that can display the image or a placeholder
     const imageHTML = `
         <div class="mockup-image-wrapper">
-            <img src="${mockup.image}" alt="${mockup.name}" class="project-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <img src="${mockup.image}" alt="${mockup.name} design mockup" class="project-img" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="project-placeholder" style="display: none;">
                 <span>${mockup.name}</span>
             </div>
@@ -127,18 +131,22 @@ function generateMockupCard(mockup) {
         : '';
 
     return `
-        <div class="project-card" style="opacity: 1; transform: translateY(0);">
-            <div class="project-image">
-                ${imageHTML}
-            </div>
-            <div class="project-content">
-                <h3 class="project-name">${mockup.name}</h3>
-                <p class="project-description">${mockup.description}</p>
-                <div class="project-footer">
-                    ${buttonHTML}
+        <article class="project-card" data-tilt-card>
+            <div class="project-card-inner">
+                <div class="project-image">
+                    ${imageHTML}
+                    <span class="project-index">M${String(index + 1).padStart(2, '0')}</span>
+                    <span class="project-image-overlay"></span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-name">${mockup.name}</h3>
+                    <p class="project-description">${mockup.description}</p>
+                    <div class="project-footer">
+                        ${buttonHTML}
+                    </div>
                 </div>
             </div>
-        </div>
+        </article>
     `;
 }
 
@@ -154,8 +162,8 @@ function renderProjects() {
     projectsGrid.innerHTML = '';
 
     // Generate and append project cards
-    projects.forEach(project => {
-        const cardHTML = generateProjectCard(project);
+    projects.forEach((project, index) => {
+        const cardHTML = generateProjectCard(project, index);
         projectsGrid.insertAdjacentHTML('beforeend', cardHTML);
     });
 
@@ -165,6 +173,8 @@ function renderProjects() {
         card.style.opacity = '1';
         card.style.transform = 'translateY(0)';
     });
+
+    document.dispatchEvent(new CustomEvent('portfolio:projects-rendered'));
 }
 
 // Function to render mockups
@@ -179,12 +189,12 @@ function renderMockups() {
     projectsGrid.innerHTML = '';
 
     // Generate and append mockup cards
-    mockups.forEach(mockup => {
-        const cardHTML = generateMockupCard(mockup);
+    mockups.forEach((mockup, index) => {
+        const cardHTML = generateMockupCard(mockup, index);
         projectsGrid.insertAdjacentHTML('beforeend', cardHTML);
     });
 
-    // Cards are already visible (inline styles set in generateMockupCard)
+    document.dispatchEvent(new CustomEvent('portfolio:projects-rendered'));
 }
 
 // Function to toggle between projects and mockups

@@ -1,123 +1,127 @@
-// Navigation functionality
-// Using defer attribute ensures DOM is ready when this executes
 const navbar = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 
-// Safety check - elements should exist with defer, but just in case
-if (!navbar || !hamburger || !navMenu) {
-    console.warn('Navigation elements not found');
+function closeNavigation() {
+    if (!hamburger || !navMenu) return;
+
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Open navigation');
 }
 
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    if (navbar && window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else if (navbar) {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// Mobile menu toggle
 if (hamburger && navMenu) {
     hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
+        const isOpen = navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        hamburger.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeNavigation();
     });
 }
 
-// Close mobile menu when clicking on a link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        if (hamburger && navMenu) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        }
-    });
-});
-
-// Smooth scroll for navigation links
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', event => {
         const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        
-        if (targetSection) {
-            const offsetTop = targetSection.offsetTop - 70;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
+        if (!targetId || targetId === '#') return;
+
+        const target = document.querySelector(targetId);
+        if (!target) return;
+
+        event.preventDefault();
+        closeNavigation();
+        target.scrollIntoView({
+            behavior: reducedMotion.matches ? 'auto' : 'smooth',
+            block: 'start'
+        });
     });
 });
 
-// Smooth scroll for hero buttons
-const heroButtons = document.querySelectorAll('.button-container .button-89');
-heroButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const href = btn.getAttribute('href');
-        if (href && href.startsWith('#')) {
-            e.preventDefault();
-            const targetSection = document.querySelector(href);
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 70;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-        }
-    });
-});
+let scrollTicking = false;
+function updateNavbar() {
+    if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 32);
+    scrollTicking = false;
+}
 
-// Active navigation link on scroll
+window.addEventListener('scroll', () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(updateNavbar);
+}, { passive: true });
+updateNavbar();
+
 const sections = document.querySelectorAll('section[id]');
+if ('IntersectionObserver' in window && sections.length) {
+    const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
 
-function highlightNavLink() {
-    const scrollY = window.pageYOffset;
-    
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-        
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.classList.add('active');
-                }
+                link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
             });
-        }
+        });
+    }, { rootMargin: '-35% 0px -55%', threshold: 0 });
+
+    sections.forEach(section => sectionObserver.observe(section));
+}
+
+const initializedTiltCards = new WeakSet();
+
+function initializeCardTilt() {
+    if (!finePointer.matches || reducedMotion.matches) return;
+
+    document.querySelectorAll('[data-tilt-card]').forEach(card => {
+        if (initializedTiltCards.has(card)) return;
+        initializedTiltCards.add(card);
+
+        const inner = card.querySelector('.project-card-inner');
+        if (!inner) return;
+
+        card.addEventListener('pointermove', event => {
+            const bounds = card.getBoundingClientRect();
+            const x = (event.clientX - bounds.left) / bounds.width;
+            const y = (event.clientY - bounds.top) / bounds.height;
+
+            inner.style.setProperty('--rotate-x', `${(0.5 - y) * 6}deg`);
+            inner.style.setProperty('--rotate-y', `${(x - 0.5) * 7}deg`);
+            inner.style.setProperty('--pointer-x', `${x * 100}%`);
+            inner.style.setProperty('--pointer-y', `${y * 100}%`);
+        });
+
+        card.addEventListener('pointerleave', () => {
+            inner.style.setProperty('--rotate-x', '0deg');
+            inner.style.setProperty('--rotate-y', '0deg');
+            inner.style.setProperty('--pointer-x', '50%');
+            inner.style.setProperty('--pointer-y', '50%');
+        });
     });
 }
 
-window.addEventListener('scroll', highlightNavLink);
+function initializeHeroDepth() {
+    const hero = document.querySelector('.hero');
+    const frame = document.querySelector('.cube-stage');
+    if (!hero || !frame || !finePointer.matches || reducedMotion.matches) return;
 
-// Set active state for nav links
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
+    hero.addEventListener('pointermove', event => {
+        const x = event.clientX / window.innerWidth - 0.5;
+        const y = event.clientY / window.innerHeight - 0.5;
+        frame.style.setProperty('--hero-rotate-x', `${7 - y * 5}deg`);
+        frame.style.setProperty('--hero-rotate-y', `${-8 + x * 7}deg`);
     });
-});
 
-// Preload background image to prevent rendering issues
-const bgImage = new Image();
-const hero = document.querySelector('.hero');
-if (hero) {
-    bgImage.src = 'images/hero-bg.webp';
-    bgImage.onload = () => {
-        // Force a reflow to ensure background renders behind navbar
-        hero.style.backgroundImage = `url('images/hero-bg.webp')`;
-        // Trigger a repaint
-        void hero.offsetHeight;
-    };
-    // If image is already cached, set it immediately
-    if (bgImage.complete) {
-        hero.style.backgroundImage = `url('images/hero-bg.webp')`;
-    }
+    hero.addEventListener('pointerleave', () => {
+        frame.style.setProperty('--hero-rotate-x', '7deg');
+        frame.style.setProperty('--hero-rotate-y', '-8deg');
+    });
 }
+
+document.addEventListener('portfolio:projects-rendered', initializeCardTilt);
+initializeCardTilt();
+initializeHeroDepth();
