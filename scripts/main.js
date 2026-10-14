@@ -1,127 +1,135 @@
-const navbar = document.getElementById('navbar');
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('nav-menu');
-const navLinks = document.querySelectorAll('.nav-link');
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+(function () {
+    const root = document.documentElement;
+    const validThemes = ['system', 'light', 'dark'];
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let theme = 'system';
+    let themeTransition;
+    let revealObserver;
 
-function closeNavigation() {
-    if (!hamburger || !navMenu) return;
+    // Set the saved theme before the stylesheet paints; storage is optional.
+    try {
+        const saved = localStorage.getItem('kurtian-theme');
+        if (validThemes.includes(saved)) theme = saved;
+    } catch (error) { /* The OS preference still works if browser storage is unavailable. */ }
+    root.dataset.theme = theme;
 
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-    hamburger.setAttribute('aria-expanded', 'false');
-    hamburger.setAttribute('aria-label', 'Open navigation');
-}
+    async function transitionTheme() {
+        if (themeTransition) themeTransition.skipTransition();
+        if (motionPreference.matches || typeof document.startViewTransition !== 'function') {
+            root.dataset.theme = theme;
+            return;
+        }
 
-if (hamburger && navMenu) {
-    hamburger.addEventListener('click', () => {
-        const isOpen = navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active', isOpen);
-        hamburger.setAttribute('aria-expanded', String(isOpen));
-        hamburger.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
-    });
+        root.classList.add('theme-transitioning');
+        const transition = document.startViewTransition(() => { root.dataset.theme = theme; });
+        themeTransition = transition;
+        let animation;
 
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') closeNavigation();
-    });
-}
+        try {
+            await transition.ready;
+            if (themeTransition !== transition || motionPreference.matches) return;
+            const radius = Math.hypot(window.innerWidth, window.innerHeight) / 2 + 2;
+            animation = root.animate([
+                { clipPath: 'circle(0px at 50% 50%)' },
+                { clipPath: `circle(${radius}px at 50% 50%)` }
+            ], {
+                duration: 900,
+                easing: 'cubic-bezier(.4, 0, .2, 1)',
+                fill: 'forwards',
+                pseudoElement: '::view-transition-new(root)'
+            });
+        } catch (error) {
+            // A skipped snapshot must never prevent the selected theme applying.
+            root.dataset.theme = theme;
+            transition.skipTransition();
+        } finally {
+            await transition.finished;
+            if (animation) animation.cancel();
+            if (themeTransition === transition) {
+                themeTransition = null;
+                root.classList.remove('theme-transitioning');
+            }
+        }
+    }
 
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', event => {
-        const targetId = link.getAttribute('href');
-        if (!targetId || targetId === '#') return;
-
-        const target = document.querySelector(targetId);
-        if (!target) return;
-
-        event.preventDefault();
-        closeNavigation();
-        target.scrollIntoView({
-            behavior: reducedMotion.matches ? 'auto' : 'smooth',
-            block: 'start'
+    function revealAll() {
+        document.querySelectorAll('[data-reveal]').forEach(element => {
+            element.classList.remove('reveal-pending');
+            element.classList.add('is-revealed');
         });
-    });
-});
+    }
 
-let scrollTicking = false;
-function updateNavbar() {
-    if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 32);
-    scrollTicking = false;
-}
+    function revealElement(element) {
+        const revealTarget = element && element.closest('[data-reveal]');
+        if (!revealTarget) return;
+        revealTarget.classList.remove('reveal-pending');
+        revealTarget.classList.add('is-revealed', 'reveal-immediate');
+        if (revealObserver) revealObserver.unobserve(revealTarget);
+    }
 
-window.addEventListener('scroll', () => {
-    if (scrollTicking) return;
-    scrollTicking = true;
-    requestAnimationFrame(updateNavbar);
-}, { passive: true });
-updateNavbar();
+    function revealHashTarget() {
+        if (!location.hash) return;
+        let targetId;
+        try { targetId = decodeURIComponent(location.hash.slice(1)); } catch (error) { return; }
+        const target = document.getElementById(targetId);
+        if (target) revealElement(target);
+    }
 
-const sections = document.querySelectorAll('section[id]');
-if ('IntersectionObserver' in window && sections.length) {
-    const sectionObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
+    function observeReveals() {
+        if (motionPreference.matches || !('IntersectionObserver' in window)) {
+            root.classList.remove('motion-ready');
+            if (revealObserver) revealObserver.disconnect();
+            revealAll();
+            return;
+        }
 
-            navLinks.forEach(link => {
-                link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+        root.classList.add('motion-ready');
+        if (!revealObserver) {
+            revealObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.remove('reveal-pending');
+                    entry.target.classList.add('is-revealed');
+                    revealObserver.unobserve(entry.target);
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        }
+
+        document.querySelectorAll('[data-reveal]:not(.is-revealed)').forEach(element => {
+            element.classList.add('reveal-pending');
+            revealObserver.observe(element);
+        });
+    }
+
+    function updateMotionPreference() {
+        if (motionPreference.matches) {
+            if (themeTransition) themeTransition.skipTransition();
+        }
+        observeReveals();
+    }
+
+    if (!motionPreference.matches && 'IntersectionObserver' in window) root.classList.add('motion-ready');
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const inputs = document.querySelectorAll('input[name="theme"]');
+
+        document.addEventListener('focusin', event => revealElement(event.target));
+        window.addEventListener('hashchange', revealHashTarget);
+
+        inputs.forEach(input => {
+            input.checked = input.value === theme;
+            input.addEventListener('change', () => {
+                if (!input.checked || !validThemes.includes(input.value) || input.value === theme) return;
+
+                theme = input.value;
+                try { localStorage.setItem('kurtian-theme', theme); } catch (error) { /* Optional persistence. */ }
+                transitionTheme();
             });
         });
-    }, { rootMargin: '-35% 0px -55%', threshold: 0 });
 
-    sections.forEach(section => sectionObserver.observe(section));
-}
-
-const initializedTiltCards = new WeakSet();
-
-function initializeCardTilt() {
-    if (!finePointer.matches || reducedMotion.matches) return;
-
-    document.querySelectorAll('[data-tilt-card]').forEach(card => {
-        if (initializedTiltCards.has(card)) return;
-        initializedTiltCards.add(card);
-
-        const inner = card.querySelector('.project-card-inner');
-        if (!inner) return;
-
-        card.addEventListener('pointermove', event => {
-            const bounds = card.getBoundingClientRect();
-            const x = (event.clientX - bounds.left) / bounds.width;
-            const y = (event.clientY - bounds.top) / bounds.height;
-
-            inner.style.setProperty('--rotate-x', `${(0.5 - y) * 6}deg`);
-            inner.style.setProperty('--rotate-y', `${(x - 0.5) * 7}deg`);
-            inner.style.setProperty('--pointer-x', `${x * 100}%`);
-            inner.style.setProperty('--pointer-y', `${y * 100}%`);
-        });
-
-        card.addEventListener('pointerleave', () => {
-            inner.style.setProperty('--rotate-x', '0deg');
-            inner.style.setProperty('--rotate-y', '0deg');
-            inner.style.setProperty('--pointer-x', '50%');
-            inner.style.setProperty('--pointer-y', '50%');
-        });
-    });
-}
-
-function initializeHeroDepth() {
-    const hero = document.querySelector('.hero');
-    const frame = document.querySelector('.cube-stage');
-    if (!hero || !frame || !finePointer.matches || reducedMotion.matches) return;
-
-    hero.addEventListener('pointermove', event => {
-        const x = event.clientX / window.innerWidth - 0.5;
-        const y = event.clientY / window.innerHeight - 0.5;
-        frame.style.setProperty('--hero-rotate-x', `${7 - y * 5}deg`);
-        frame.style.setProperty('--hero-rotate-y', `${-8 + x * 7}deg`);
-    });
-
-    hero.addEventListener('pointerleave', () => {
-        frame.style.setProperty('--hero-rotate-x', '7deg');
-        frame.style.setProperty('--hero-rotate-y', '-8deg');
-    });
-}
-
-document.addEventListener('portfolio:projects-rendered', initializeCardTilt);
-initializeCardTilt();
-initializeHeroDepth();
+        revealHashTarget();
+        observeReveals();
+        if (typeof motionPreference.addEventListener === 'function') motionPreference.addEventListener('change', updateMotionPreference);
+        else if (typeof motionPreference.addListener === 'function') motionPreference.addListener(updateMotionPreference);
+    }, { once: true });
+}());

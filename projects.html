@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web applications, ecommerce platforms, and interface design explorations by Kurt Ian Bernaldez.">
+    <title>Projects — Kurt Ian Bernaldez</title>
+    <link rel="icon" type="image/png" href="images/logo-favicon.png">
+    <script src="scripts/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/projects.js" defer></script>
+</head>
+<body class="projects-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+        <aside class="sidebar" aria-label="Portfolio navigation">
+            <a class="sidebar-brand" href="index.html" aria-label="Kurt Ian Bernaldez, home"><span class="brand-mark" aria-hidden="true">KI</span><span class="brand-name">Kurt Ian<small>Bernaldez</small></span></a>
+            <p class="sidebar-caption">Portfolio <span>2026</span></p>
+            <nav class="page-nav" aria-label="Main navigation">
+                <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3Z M9 20v-7h6v7"/></svg><span>Home</span></a>
+                <a href="projects.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Projects</span></a>
+                <a href="experience.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V3h8v4 M3 12c5 4 13 4 18 0 M12 12v4"/></svg><span>Experience</span></a>
+                <a href="stack.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 7 9-4 9 4-9 4Z M3 12l9 4 9-4 M3 17l9 4 9-4"/></svg><span>Stack</span></a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a class="sidebar-contact" href="mailto:bernaldezkurtian@gmail.com"><span>Have a project?</span><strong>Let’s talk <span aria-hidden="true">↗</span></strong></a>
+                <fieldset class="theme-switcher"><legend class="visually-hidden">Color theme</legend><label><input type="radio" name="theme" value="system" checked><span>System</span></label><label><input type="radio" name="theme" value="light"><span>Light</span></label><label><input type="radio" name="theme" value="dark"><span>Dark</span></label></fieldset>
+            </div>
+        </aside>
+
+        <div class="page-column">
+            <main id="main-content" tabindex="-1">
+                <header class="page-header" data-reveal>
+                    <h1>Projects<span class="name-period">.</span></h1>
+                    <p>Useful products, built for real workflows. A collection of client platforms, personal projects, and interface explorations.</p>
+                    <div class="page-header-meta"><span>08 web projects</span><span>02 design mockups</span><span>Updated September 2026</span></div>
+                </header>
+
+                <div class="project-view" role="tablist" aria-label="Project collection" hidden>
+                    <button id="development-tab" class="view-tab" type="button" role="tab" aria-selected="true" aria-controls="development-panel" tabindex="0" data-project-view="development">Development <span>08</span></button>
+                    <button id="mockups-tab" class="view-tab" type="button" role="tab" aria-selected="false" aria-controls="mockups-panel" tabindex="-1" data-project-view="mockups">Design mockups <span>02</span></button>
+                </div>
+
+                <section class="project-panel" id="development-panel" data-project-panel="development" aria-labelledby="development-heading">
+                    <h2 class="panel-heading" id="development-heading"><span>01</span>Web apps &amp; platforms <small>08 projects</small></h2>
+                    <div class="projects-grid">
+                        <article class="project-card project-card--logo" id="project-stamped" data-reveal>
+                            <div class="project-card-top"><span class="project-index">01 / PRODUCT</span><img src="images/stamped.png" alt="" class="project-logo" width="56" height="56" loading="lazy"></div>
+                            <div class="project-content"><p class="project-type">Document workflow web app</p><h3 class="project-name">Stamped</h3><p class="project-description">A self-built product for digital stamping workflows, organized records, and managing document status and approvals.</p>
+                                <ul class="project-tech" aria-label="Technologies"><li>Laravel</li><li>PHP</li><li>MySQL</li><li>JavaScript</li><li>Tailwind CSS</li></ul>
+                                <div class="project-links"><a href="https://stamped.kurtian.dev/" target="_blank" rel="noopener noreferrer" class="project-link">Visit site</a><a href="https://github.com/kurtianbernaldez/stamped" target="_blank" rel="noopener noreferrer" class="project-link">GitHub repository</a></div>
+                            </div>
+                        </article>
+                        <article class="project-card project-card--logo" id="project-design-style-mds" data-reveal>
+                            <div class="project-card-top"><span class="project-index">02 / REFERENCE</span><img src="images/design-style-mds.svg" alt="" class="project-logo" width="56" height="56" loading="lazy"></div>
+                            <div class="project-content"><p class="project-type">Design reference web app</p><h3 class="project-name">Design Style MDS</h3><p class="project-description">A collection of design.md references for different visual styles.</p>
+                                <div class="project-links"><a href="https://styles.kurtian.dev/" target="_blank" rel="noopener noreferrer" class="project-link">Visit site</a><a href="https://github.com/kurtianbernaldez/design-style-mds" target="_blank" rel="noopener noreferrer" class="project-link">GitHub repository</a></div>
+                            </div>
+                        </article>
+                        <article class="project-card project-card--logo" id="project-deskmux" data-reveal>
+                            <div class="project-card-top"><span class="project-index">03 / PRODUCT</span><img src="images/deskmux-logo.png" alt="" class="project-logo" width="56" height="56" loading="lazy"></div>
+                            <div class="project-content"><p class="project-type">App multiplexer</p><h3 class="project-name">Deskmux</h3><p class="project-description">A single place to access and switch between apps.</p>
+                                <div class="project-links"><a href="https://deskmux.kurtian.dev/" target="_blank" rel="noopener noreferrer" class="project-link">Visit site</a><a href="https://github.com/kurtianbernaldez/DeskMux" target="_blank" rel="noopener noreferrer" class="project-link">GitHub repository</a></div>
+                            </div>
+                        </article>
+                        <article class="project-card" id="project-ag-pos" data-reveal>
+                            <div class="project-card-top"><span class="project-index">04 / OPERATIONS</span><span class="project-mark project-mark--lime" aria-hidden="true">A&amp;G</span></div>
+                            <div class="project-content"><p class="project-type">Enterprise web app</p><h3 class="project-name">A&amp;G POS &amp; Inventory Management System</h3><p class="project-description">Connects point of sale, inventory, purchasing, and analytics for business operations.</p>
+                                <ul class="project-tech" aria-label="Technologies"><li>Next.js 16</li><li>React 19</li><li>TypeScript</li><li>Node.js</li><li>PostgreSQL</li></ul>
+                            </div>
+                        </article>
+                        <article class="project-card" id="project-propdesk" data-reveal>
+                            <div class="project-card-top"><span class="project-index">05 / CLIENT WORK</span><span class="project-mark project-mark--blue" aria-hidden="true">PD</span></div>
+                            <div class="project-content"><p class="project-type">Property management web app</p><h3 class="project-name">Propdesk</h3><p class="project-description">Organizes property listings, inquiries, client records, and daily real estate workflows.</p>
+                                <ul class="project-tech" aria-label="Technologies"><li>Laravel</li><li>PHP</li><li>MySQL</li><li>JavaScript</li><li>Bootstrap</li></ul>
+                                <div class="project-links"><a href="https://propdesk.ph" target="_blank" rel="noopener noreferrer" class="project-link">Visit site</a></div>
+                            </div>
+                        </article>
+                        <article class="project-card" id="project-bridalgallerycebu" data-reveal>
+                            <div class="project-card-top"><span class="project-index">06 / CLIENT WORK</span><span class="project-mark project-mark--rose" aria-hidden="true">BG</span></div>
+                            <div class="project-content"><p class="project-type">Ecommerce and booking web app</p><h3 class="project-name">BridalGalleryCebu</h3><p class="project-description">Brings bridal products, packages, supplier workflows, bookings, and checkout together.</p>
+                                <ul class="project-tech" aria-label="Technologies"><li>Laravel</li><li>PHP</li><li>MySQL</li><li>Blade</li><li>Tailwind CSS</li></ul>
+                                <div class="project-links"><a href="https://bridagallerycebu.com" target="_blank" rel="noopener noreferrer" class="project-link">Visit site</a></div>
+                            </div>
+                        </article>
+                        <article class="project-card" id="project-social-link-website" data-reveal>
+                            <div class="project-card-top"><span class="project-index">07 / CLIENT WORK</span><span class="project-mark project-mark--violet" aria-hidden="true">SL</span></div>
+                            <div class="project-content"><p class="project-type">Link hub website</p><h3 class="project-name">Social Link Website</h3><p class="project-description">Gives an artist one place to share profiles, links, and contact details.</p>
+                                <ul class="project-tech" aria-label="Technologies"><li>WordPress</li><li>PHP</li><li>CSS</li><li>JavaScript</li><li>SEO</li></ul>
+                                <div class="project-links"><a href="https://wetsoggy.42web.io/?i=1" target="_blank" rel="noopener noreferrer" class="project-link">Visit site</a></div>
+                            </div>
+                        </article>
+                        <article class="project-card" id="project-foodprep-pro" data-reveal>
+                            <div class="project-card-top"><span class="project-index">08 / CLIENT WORK</span><span class="project-mark project-mark--orange" aria-hidden="true">FP</span></div>
+                            <div class="project-content"><p class="project-type">Operations web app</p><h3 class="project-name">FoodPrep Pro</h3><p class="project-description">An admin and staff management portal with real-time product listings and order tracking.</p>
+                                <ul class="project-tech" aria-label="Technologies"><li>React</li><li>Firebase</li><li>PayMongo</li></ul>
+                                <div class="project-links"><a href="https://orderup-14fbd.web.app/" target="_blank" rel="noopener noreferrer" class="project-link">Visit site</a><a href="https://github.com/kurtianbernaldez/FoodPrepPro" target="_blank" rel="noopener noreferrer" class="project-link">GitHub repository</a></div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="project-panel" id="mockups-panel" data-project-panel="mockups" aria-labelledby="mockups-heading">
+                    <h2 class="panel-heading" id="mockups-heading"><span>02</span>Visual studies &amp; interface concepts <small>02 explorations</small></h2>
+                    <div class="projects-grid mockups-grid">
+                        <article class="project-card mockup-card" id="mockup-aprilia-rsv4" data-reveal>
+                            <a class="project-art" href="https://www.figma.com/design/qpyJOoWdomsfnEDmQfnh3H/RSV4-Landing-Page?node-id=0-1&t=IqPNbV1lEOuDc8Mv-1" target="_blank" rel="noopener noreferrer" aria-label="View the Aprilia RSV4 landing page mockup on Figma"><img src="images/projects/mockups/mockup-1.webp" alt="Aprilia RSV4 Factory 1100 landing page mockup" width="699" height="392" loading="lazy"></a>
+                            <div class="project-content"><p class="project-type">Landing page mockup</p><h3 class="project-name">Aprilia RSV4 Factory 1100</h3><p class="project-description">A bold landing page concept shaped around the motorcycle’s racing identity.</p><div class="project-links"><a href="https://www.figma.com/design/qpyJOoWdomsfnEDmQfnh3H/RSV4-Landing-Page?node-id=0-1&t=IqPNbV1lEOuDc8Mv-1" target="_blank" rel="noopener noreferrer" class="project-link">View on Figma</a></div></div>
+                        </article>
+                        <article class="project-card mockup-card mockup-card--portrait" id="mockup-kachava" data-reveal>
+                            <a class="project-art" href="https://www.figma.com/design/uK1K3j7dJtIgjfFszCb6IS/Ka-Chava-Redesign?node-id=0-1&t=lfhqPc9jXh352U9C-1" target="_blank" rel="noopener noreferrer" aria-label="View the Ka’Chava homepage redesign on Figma"><img src="images/projects/mockups/mockup-2.webp" alt="Ka’Chava homepage redesign mockup" width="699" height="874" loading="lazy"></a>
+                            <div class="project-content"><p class="project-type">Homepage redesign</p><h3 class="project-name">Ka’Chava</h3><p class="project-description">A homepage concept focused on clearer content, easier navigation, and conversion.</p><div class="project-links"><a href="https://www.figma.com/design/uK1K3j7dJtIgjfFszCb6IS/Ka-Chava-Redesign?node-id=0-1&t=lfhqPc9jXh352U9C-1" target="_blank" rel="noopener noreferrer" class="project-link">View on Figma</a></div></div>
+                        </article>
+                    </div>
+                </section>
+
+                <noscript><p class="noscript-note">JavaScript is off, so both project collections are shown together.</p></noscript>
+            </main>
+            <footer class="site-footer"><p>© 2026 Kurt Ian Bernaldez</p><a href="mailto:bernaldezkurtian@gmail.com">Let’s build something <span aria-hidden="true">↗</span></a></footer>
+        </div>
+    </div>
+</body>
+</html>

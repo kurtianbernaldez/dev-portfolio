@@ -98,11 +98,11 @@ A recipe discovery app with advanced filtering for diets, meal types, ingredient
 
 ## About This Portfolio
 
-A modern single-page portfolio website featuring a dark cosmic theme with smooth GSAP scroll animations.
+A static portfolio built with HTML, CSS, and vanilla JavaScript. Home (`index.html`) introduces my work and links to dedicated `projects.html`, `experience.html`, and `stack.html` pages. Navigation uses ordinary `.html` links; the project gallery also works without JavaScript, with accessible Development and Design mockups tabs when JavaScript is available.
 
-**Features:** Dark Cosmic Theme - GSAP Animations - Responsive Design - Glassmorphism Effects - Business Card Contact
+The portfolio uses a restrained black, white, and gray palette with compact layouts and subtle entrance, hover, and tab animations. System, Light, and Dark theme choices persist across pages when browser storage is available, and motion responds to the operating-system reduced-motion preference.
 
-**Built With:** HTML5 & CSS3 - Vanilla JavaScript - [GSAP](https://greensock.com/gsap/) with ScrollTrigger - Google Fonts
+**Built With:** HTML5, CSS3, Vanilla JavaScript, and Google Fonts.
 
 ---
 

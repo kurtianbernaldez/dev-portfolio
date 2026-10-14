@@ -1,236 +1,73 @@
-// Projects Data Array
-const projects = [
-    {
-        name: "A&G POS & Inventory Management System",
-        image: "images/projects/ag.webp",
-        description: "A comprehensive full-stack POS and inventory management system with multi-instance architecture, secure authentication, and advanced business modules including sales, purchases, and analytics.",
-        tech: ["Next.js 16", "React 19", "TypeScript", "Node.js", "PostgreSQL"],
-        link: "" // Add your project URL here
-    },
-    {
-        name: "Propdesk",
-        image: "images/projects/propdesk.jpeg",
-        description: "A property management platform built to organize listings, inquiries, client records, and day-to-day real estate workflows in one streamlined workspace.",
-        tech: ["Laravel", "PHP", "MySQL", "JavaScript", "Bootstrap"],
-        link: "https://propdesk.ph"
-    },
-    {
-        name: "BridalGalleryCebu",
-        image: "images/projects/bridalgallery.jpeg",
-        description: "A bridal ecommerce and booking platform with product catalogs, package management, supplier workflows, checkout flows, and admin controls.",
-        tech: ["Laravel", "PHP", "MySQL", "Blade", "Tailwind CSS"],
-        link: "https://bridagallerycebu.com"
-    },
-    {
-        name: "Social Link Website",
-        image: "images/projects/social-link.webp",
-        description: "A simple, clean social link website built for an artist, serving as a central hub for their online profiles, links, and contact information, making it easy for fans and collaborators to connect and stay in touch.",
-        tech: ["WordPress", "PHP", "CSS", "JavaScript", "SEO"],
-        link: "https://wetsoggy.42web.io/?i=1" // Add your project URL here
-    },
-    {
-        name: "FoodPrep Pro",
-        image: "images/projects/foodprep.webp",
-        description: "Led the end-to-end development of an Admin and Staff management portal for a local food service startup, streamlining workflows and significantly improving operational efficiency.",
-        tech: ["React", "Firebase", "PayMongo"],
-        link: "" // Add your project URL here
-    },
-    {
-        name: "Stamped",
-        image: "images/projects/stamped.jpeg",
-        description: "A self-built product focused on digital stamping workflows, organized records, and a simple interface for managing document status and approvals.",
-        tech: ["Laravel", "PHP", "MySQL", "JavaScript", "Tailwind CSS"],
-        link: "https://stamped.kurtian.dev/"
-    }
-];
+(function () {
+    const tabs = Array.from(document.querySelectorAll('[data-project-view]'));
+    const panels = Array.from(document.querySelectorAll('[data-project-panel]'));
+    const tabList = document.querySelector('.project-view');
+    if (!tabs.length || !panels.length || !tabList) return;
 
-// Mockups Data Array (separate from projects)
-const mockups = [
-    {
-        name: "Aprilia RSV4 Factory 1100 - Landing Page Mockup",
-        image: "images/projects/mockups/mockup-1.webp",
-        description: "A visually driven landing page mockup highlighting the performance and racing identity of the Aprilia RSV4 Factory 1100 through bold layouts and modern UI design.",
-        link: "https://www.figma.com/design/qpyJOoWdomsfnEDmQfnh3H/RSV4-Landing-Page?node-id=0-1&t=IqPNbV1lEOuDc8Mv-1" 
-    },
-    {
-        name: "Ka'Chava - Homepage Redesign",
-        image: "images/projects/mockups/mockup-2.webp",
-        description: "A homepage redesign concept focused on improving user experience, content clarity, and conversion through clean, modern design.",
-        link: "https://www.figma.com/design/uK1K3j7dJtIgjfFszCb6IS/Ka-Chava-Redesign?node-id=0-1&t=lfhqPc9jXh352U9C-1" 
-    }
-    // Add more mockups here as needed
-];
+    const panelFor = view => panels.find(panel => panel.dataset.projectPanel === view);
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let switchTimer;
+    let enteringPanel;
 
-// Global variable to track current view mode
-let showMockups = false;
+    function activate(view, options = {}) {
+        const nextPanel = panelFor(view);
+        if (!nextPanel) return;
 
-// Function to generate project card HTML
-function generateProjectCard(project, index) {
-    const techTags = project.tech.map(tech => 
-        `<span class="tech-tag">${tech}</span>`
-    ).join('');
+        tabs.forEach(tab => {
+            const selected = tab.dataset.projectView === view;
+            tab.setAttribute('aria-selected', String(selected));
+            tab.tabIndex = selected ? 0 : -1;
+        });
+        panels.forEach(panel => {
+            const selected = panel === nextPanel;
+            panel.hidden = !selected;
+            panel.setAttribute('role', 'tabpanel');
+            if (selected) panel.setAttribute('aria-labelledby', tabs.find(tab => tab.dataset.projectView === view).id);
+            else panel.removeAttribute('aria-labelledby');
+            panel.tabIndex = selected ? 0 : -1;
+        });
 
-    // Use image if provided, otherwise show placeholder
-    const imageHTML = project.image 
-        ? `<img src="${project.image}" alt="${project.name} project preview" class="project-img" loading="lazy" decoding="async">`
-        : `<div class="project-placeholder">Project Image</div>`;
-
-    // Only show button if link exists
-    const buttonHTML = project.link 
-        ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" class="visit-site-btn">
-               <span>Visit Site</span>
-               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                   <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-               </svg>
-           </a>`
-        : '';
-
-    return `
-        <article class="project-card" data-tilt-card>
-            <div class="project-card-inner">
-                <div class="project-image">
-                    ${imageHTML}
-                    <span class="project-index">${String(index + 1).padStart(2, '0')}</span>
-                    <span class="project-image-overlay"></span>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-name">${project.name}</h3>
-                    <div class="project-tech">
-                        ${techTags}
-                    </div>
-                    <p class="project-description">${project.description}</p>
-                    <div class="project-footer">
-                        ${buttonHTML}
-                    </div>
-                </div>
-            </div>
-        </article>
-    `;
-}
-
-// Function to generate mockup card HTML
-function generateMockupCard(mockup, index) {
-    // Always show a placeholder div that can display the image or a placeholder
-    const imageHTML = `
-        <div class="mockup-image-wrapper">
-            <img src="${mockup.image}" alt="${mockup.name} design mockup" class="project-img" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="project-placeholder" style="display: none;">
-                <span>${mockup.name}</span>
-            </div>
-        </div>
-    `;
-
-    // Only show button if link exists
-    const buttonHTML = mockup.link 
-        ? `<a href="${mockup.link}" target="_blank" rel="noopener noreferrer" class="visit-site-btn">
-               <span>Visit Site</span>
-               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                   <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-               </svg>
-           </a>`
-        : '';
-
-    return `
-        <article class="project-card" data-tilt-card>
-            <div class="project-card-inner">
-                <div class="project-image">
-                    ${imageHTML}
-                    <span class="project-index">M${String(index + 1).padStart(2, '0')}</span>
-                    <span class="project-image-overlay"></span>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-name">${mockup.name}</h3>
-                    <p class="project-description">${mockup.description}</p>
-                    <div class="project-footer">
-                        ${buttonHTML}
-                    </div>
-                </div>
-            </div>
-        </article>
-    `;
-}
-
-// Function to render projects
-function renderProjects() {
-    const projectsGrid = document.querySelector('.projects-grid');
-    if (!projectsGrid) {
-        console.error('Projects grid container not found');
-        return;
-    }
-
-    // Clear existing content
-    projectsGrid.innerHTML = '';
-
-    // Generate and append project cards
-    projects.forEach((project, index) => {
-        const cardHTML = generateProjectCard(project, index);
-        projectsGrid.insertAdjacentHTML('beforeend', cardHTML);
-    });
-
-    // Make cards visible immediately (reset animation state)
-    const cards = projectsGrid.querySelectorAll('.project-card');
-    cards.forEach(card => {
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-    });
-
-    document.dispatchEvent(new CustomEvent('portfolio:projects-rendered'));
-}
-
-// Function to render mockups
-function renderMockups() {
-    const projectsGrid = document.querySelector('.projects-grid');
-    if (!projectsGrid) {
-        console.error('Projects grid container not found');
-        return;
-    }
-
-    // Clear existing content
-    projectsGrid.innerHTML = '';
-
-    // Generate and append mockup cards
-    mockups.forEach((mockup, index) => {
-        const cardHTML = generateMockupCard(mockup, index);
-        projectsGrid.insertAdjacentHTML('beforeend', cardHTML);
-    });
-
-    document.dispatchEvent(new CustomEvent('portfolio:projects-rendered'));
-}
-
-// Function to toggle between projects and mockups
-function toggleView() {
-    showMockups = !showMockups;
-    
-    if (showMockups) {
-        renderMockups();
-    } else {
-        renderProjects();
-    }
-    
-    // Update button text
-    const toggleBtn = document.getElementById('view-toggle');
-    const toggleText = toggleBtn.querySelector('.toggle-text');
-    toggleText.textContent = showMockups ? 'Show Projects' : 'Show Mockups';
-    
-    // Update button class for styling
-    toggleBtn.classList.toggle('active', showMockups);
-}
-
-// Initialize projects when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        renderProjects();
-        // Add event listener to toggle button
-        const toggleBtn = document.getElementById('view-toggle');
-        if (toggleBtn) {
-            toggleBtn.addEventListener('click', toggleView);
+        if (options.animate && !reducedMotion.matches) {
+            if (enteringPanel) delete enteringPanel.dataset.entering;
+            nextPanel.dataset.entering = 'true';
+            enteringPanel = nextPanel;
+            window.clearTimeout(switchTimer);
+            switchTimer = window.setTimeout(() => {
+                delete nextPanel.dataset.entering;
+                enteringPanel = null;
+            }, 620);
         }
-    });
-} else {
-    renderProjects();
-    // Add event listener to toggle button
-    const toggleBtn = document.getElementById('view-toggle');
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', toggleView);
+        if (options.focus) tabs.find(tab => tab.dataset.projectView === view).focus();
     }
-}
+
+    function showLinkedPanel() {
+        if (!location.hash) return;
+        let targetId;
+        try { targetId = decodeURIComponent(location.hash.slice(1)); } catch (error) { return; }
+        const target = document.getElementById(targetId);
+        const owner = target && target.closest('[data-project-panel]');
+        if (!owner) return;
+
+        activate(owner.dataset.projectPanel);
+        target.classList.remove('reveal-pending');
+        target.classList.add('is-revealed');
+        window.requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant', block: 'start' }));
+        return true;
+    }
+
+    tabList.hidden = false;
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => activate(tab.dataset.projectView, { animate: true }));
+        tab.addEventListener('keydown', event => {
+            const currentIndex = tabs.indexOf(tab);
+            const destinations = { ArrowLeft: currentIndex - 1, ArrowUp: currentIndex - 1, ArrowRight: currentIndex + 1, ArrowDown: currentIndex + 1, Home: 0, End: tabs.length - 1 };
+            if (!(event.key in destinations)) return;
+            event.preventDefault();
+            const nextIndex = (destinations[event.key] + tabs.length) % tabs.length;
+            activate(tabs[nextIndex].dataset.projectView, { animate: true, focus: true });
+        });
+    });
+
+    if (!showLinkedPanel()) activate('development');
+    window.addEventListener('hashchange', showLinkedPanel);
+}());

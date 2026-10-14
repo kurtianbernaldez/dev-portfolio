@@ -1,552 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="system">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kurt Ian G. Bernaldez - Full-Stack Web Developer Portfolio">
-    <title>Kurt Ian Bernaldez | Full-Stack Web Developer</title>
+    <meta name="description" content="Kurt Ian Bernaldez is a full-stack developer in Cebu, Philippines, building practical web products and dependable systems.">
+    <title>Kurt Ian Bernaldez — Full-Stack Developer</title>
     <link rel="icon" type="image/png" href="images/logo-favicon.png">
-    
-    <!-- Preconnect to external domains for faster resource loading -->
+    <script src="scripts/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
-    <!-- Preload critical resources with high priority for LCP -->
-    <link rel="preload" as="style" href="styles/main.css?v=6">
-    <link rel="preload" as="image" href="images/hero-bg.webp" fetchpriority="high">
-    
-    <!-- Critical CSS inline for above-the-fold content -->
-    <style>
-        :root {
-            --primary-dark: #07090f;
-            --secondary-dark: #0d111b;
-            --text-primary: #ffffff;
-            --text-secondary: #d6dbe8;
-            --text-muted: #929bad;
-            --container-max-width: 1200px;
-            --transition-base: 0.3s ease;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: var(--primary-dark);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: transparent;
-            border-bottom: 1px solid transparent;
-            transition: all var(--transition-base);
-        }
-        .nav-container {
-            max-width: var(--container-max-width);
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            height: 40px;
-        }
-        .logo-img {
-            height: 100%;
-            width: auto;
-            object-fit: contain;
-            display: block;
-        }
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color var(--transition-base);
-            position: relative;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--text-primary);
-            transition: width var(--transition-base);
-        }
-        .nav-link:hover, .nav-link.active {
-            color: var(--text-primary);
-        }
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-primary);
-            transition: all var(--transition-base);
-            border-radius: 2px;
-        }
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background:
-                linear-gradient(90deg, rgba(7, 9, 15, 0.88), rgba(7, 9, 15, 0.48)),
-                url('images/hero-bg.webp') center center / cover no-repeat;
-            background-color: var(--primary-dark);
-            background-attachment: fixed;
-            background-position: center top;
-        }
-        .hero-content {
-            text-align: center;
-            z-index: 1;
-            padding: 2rem;
-            max-width: 1000px;
-            width: 100%;
-            margin: 0 auto;
-        }
-        .hero-name {
-            font-size: clamp(2rem, 6vw, 5rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            opacity: 1;
-            white-space: nowrap;
-            will-change: opacity, transform;
-        }
-        .hero-title {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            font-weight: 400;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1.5rem;
-            opacity: 1;
-            will-change: opacity, transform;
-        }
-        .hero-tagline {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-            opacity: 1;
-            width: 60%;
-            margin-left: auto;
-            margin-right: auto;
-            will-change: opacity, transform;
-        }
-        @media (max-width: 968px) {
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 70px;
-                flex-direction: column;
-                background: rgba(17, 17, 17, 0.98);
-                width: 100%;
-                text-align: center;
-                transition: left var(--transition-base);
-                padding: 2rem 0;
-                border-top: 1px solid rgba(255, 255, 255, 0.2);
-            }
-            .hamburger { display: flex; }
-        }
-    </style>
-    
-    <link rel="stylesheet" href="styles/main.css?v=6">
-    
-    <!-- Load fonts asynchronously with font-display: swap -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo" aria-label="Kurt Ian Bernaldez, home">
-                <img src="images/logo.webp" alt="" class="logo-img" width="66" height="40">
+<body class="home-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+        <aside class="sidebar" aria-label="Portfolio navigation">
+            <a class="sidebar-brand" href="index.html" aria-label="Kurt Ian Bernaldez, home">
+                <span class="brand-mark" aria-hidden="true">KI</span>
+                <span class="brand-name">Kurt Ian<small>Bernaldez</small></span>
             </a>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#tools" class="nav-link">Tools</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation" aria-controls="nav-menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
+            <p class="sidebar-caption">Portfolio <span>2026</span></p>
+            <nav class="page-nav" aria-label="Main navigation">
+                <a href="index.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3Z M9 20v-7h6v7"/></svg><span>Home</span></a>
+                <a href="projects.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Projects</span></a>
+                <a href="experience.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V3h8v4 M3 12c5 4 13 4 18 0 M12 12v4"/></svg><span>Experience</span></a>
+                <a href="stack.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 7 9-4 9 4-9 4Z M3 12l9 4 9-4 M3 17l9 4 9-4"/></svg><span>Stack</span></a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a class="sidebar-contact" href="mailto:bernaldezkurtian@gmail.com"><span>Have a project?</span><strong>Let’s talk <span aria-hidden="true">↗</span></strong></a>
+                <fieldset class="theme-switcher">
+                    <legend class="visually-hidden">Color theme</legend>
+                    <label><input type="radio" name="theme" value="system" checked><span>System</span></label>
+                    <label><input type="radio" name="theme" value="light"><span>Light</span></label>
+                    <label><input type="radio" name="theme" value="dark"><span>Dark</span></label>
+                </fieldset>
+            </div>
+        </aside>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-background" aria-hidden="true"></div>
-        <div class="hero-grid" aria-hidden="true"></div>
-        <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
-        <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
-        <div class="hero-shell">
-            <div class="hero-content">
-                <p class="hero-kicker"><span class="status-dot"></span> Based in Cebu, Philippines</p>
-                <h1 class="hero-name">
-                    <span>Kurt Ian</span>
-                    <span class="hero-name-accent">Bernaldez.</span>
-                </h1>
-                <h2 class="hero-title">Full-Stack Developer <span>/ Digital Builder</span></h2>
-                <p class="hero-tagline">I build clear interfaces and dependable systems that turn complex workflows into useful digital products.</p>
-                <div class="button-container">
-                    <a href="#projects" class="button-89 button-primary">Explore my work</a>
-                    <a href="#contact" class="button-89 button-secondary">Start a conversation</a>
-                </div>
-                <div class="social-links" aria-label="Social profiles">
-                <a href="https://www.linkedin.com/in/kurt-ian-bernaldez-a79a5b2b5/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" fill="currentColor"/>
-                    </svg>
-                </a>
-                <a href="https://github.com/kurtianbernaldez" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" fill="currentColor"/>
-                    </svg>
-                </a>
-                <a href="https://www.instagram.com/kvisuals.dev/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="currentColor"/>
-                    </svg>
-                </a>
-                </div>
-            </div>
-            <div class="hero-visual" aria-hidden="true">
-                <div class="cube-stage">
-                    <span class="visual-corner visual-corner-tl"></span>
-                    <span class="visual-corner visual-corner-br"></span>
-                    <div class="cube-grid"></div>
-                    <div class="cube-object cube-object-main">
-                        <div class="cube cube-main">
-                            <span class="cube-face cube-front"><strong>KI</strong></span>
-                            <span class="cube-face cube-back"></span>
-                            <span class="cube-face cube-right"></span>
-                            <span class="cube-face cube-left"></span>
-                            <span class="cube-face cube-top"></span>
-                            <span class="cube-face cube-bottom"></span>
-                        </div>
+        <div class="page-column">
+            <main id="main-content" tabindex="-1">
+                <section class="profile-intro" id="home" aria-labelledby="intro-title">
+                    <div class="profile-heading" data-reveal>
+                        <div><h1 id="intro-title">Kurt Ian</h1><p class="profile-role">Full-stack developer<br><span>Cebu, Philippines</span></p></div>
                     </div>
-                    <div class="cube-object cube-object-one">
-                        <div class="cube cube-small">
-                            <span class="cube-face cube-front"></span>
-                            <span class="cube-face cube-back"></span>
-                            <span class="cube-face cube-right"></span>
-                            <span class="cube-face cube-left"></span>
-                            <span class="cube-face cube-top"></span>
-                            <span class="cube-face cube-bottom"></span>
-                        </div>
-                    </div>
-                    <div class="cube-object cube-object-two">
-                        <div class="cube cube-tiny">
-                            <span class="cube-face cube-front"></span>
-                            <span class="cube-face cube-back"></span>
-                            <span class="cube-face cube-right"></span>
-                            <span class="cube-face cube-left"></span>
-                            <span class="cube-face cube-top"></span>
-                            <span class="cube-face cube-bottom"></span>
-                        </div>
-                    </div>
-                    <span class="cube-label cube-label-top">STRUCTURE / SYSTEM / UI</span>
-                    <span class="cube-label cube-label-side">THREE DIMENSIONS</span>
-                    <span class="code-chip code-chip-one">&lt;build /&gt;</span>
-                    <span class="code-chip code-chip-two">X / Y / Z</span>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="section-kicker">01 / Profile</p>
-                    <h2 class="section-title">About Me</h2>
-                    <p class="about-description">
-                        I'm a full-stack web developer focused on building practical web products, ecommerce workflows, admin systems, and responsive interfaces with reliable backend architecture.
-                    </p>
-                    <div class="skills-overview">
-                        <h3 class="skills-title">Key Skills</h3>
-                        <ul class="skills-list">
-                            <li>Laravel & PHP Application Development</li>
-                            <li>React / Next.js Frontend Development</li>
-                            <li>Ecommerce & Booking Workflow Development</li>
-                            <li>Admin Dashboard & CMS Development</li>
-                            <li>REST API & Authentication Systems</li>
-                            <li>Database Design & Optimization</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <div class="experience">
-                        <h3 class="experience-title">Experience</h3>
-                        <div class="experience-item">
-                            <h4>Freelance Web Developer</h4>
-                            <p class="experience-role">Worked on Propdesk, BridalGalleryCebu, TeaNuma, DateVoo, and SSGC Group</p>
-                            <p class="experience-duration">2024 – Present</p>
-                            <p class="experience-location">
-                                <svg class="location-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
-                                </svg>
-                                Remote
-                            </p>
-                        </div>
-                        <div class="experience-item">
-                            <h4>Kwanii</h4>
-                            <p class="experience-role">On-Call IT Specialist</p>
-                            <p class="experience-duration">Nov. 2025 – Present</p>
-                            <p class="experience-location">
-                                <svg class="location-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
-                                </svg>
-                                Cebu, On-Site
-                            </p>
-                        </div>
-                        <div class="experience-item">
-                            <h4>Personal Projects</h4>
-                            <p class="experience-role">Built Stamped</p>
-                            <p class="experience-duration">2025 – Present</p>
-                            <p class="experience-location">
-                                <svg class="location-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
-                                </svg>
-                                Cebu, Remote
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <p class="section-kicker section-kicker-centered">02 / Selected output</p>
-            <h2 class="section-title">Featured Works</h2>
-            <p class="work-description">
-                A showcase of projects and client work demonstrating my full-stack development expertise.
-            </p>
-            <div class="view-toggle-container">
-                <button id="view-toggle" class="view-toggle-btn" aria-label="Toggle between project images and mockups">
-                    <span class="toggle-text">Show Mockups</span>
-                </button>
-            </div>
-            <div class="projects-grid" id="projects-grid">
-                <!-- Projects will be dynamically generated here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Tools Section -->
-    <section id="tools" class="tools">
-        <div class="container">
-            <div class="work-content">
-                <p class="section-kicker section-kicker-centered">03 / Technical range</p>
-                <h2 class="section-title">Tools I Use</h2>
-                <p class="work-description">The platforms and software that power my design and development process.</p>
-            </div>
-            <div class="tools-container">
-                <div class="work-card one">
-                    <div class="card-number">01</div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="tech-names">
-                                <span class="tool-item">React.js</span>
-                                <span class="tool-item">Next.js</span>
-                                <span class="tool-item">TypeScript</span>
-                                <span class="tool-item">JavaScript</span>
-                                <span class="tool-item">HTML</span>
-                                <span class="tool-item">CSS</span>
-                                <span class="tool-item">Tailwind CSS</span>
-                                <span class="tool-item">Bootstrap</span>
-                                <span class="tool-item">Elementor</span>
-                            </div>
-                            <button class="ui-btn">
-                                <span>
-                                  Frontend
-                                </span>
-                              </button>
-                        </div>
-                        <p class="card-description">Building responsive, interactive, and user-friendly interfaces with modern web technologies.</p>
-                    </div>
-                </div>
-                <div class="work-card two">
-                    <div class="card-number">02</div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="tech-names">
-                                <span class="tool-item">Laravel</span>
-                                <span class="tool-item">Node.js</span>
-                                <span class="tool-item">Express.js</span>
-                                <span class="tool-item">Django</span>
-                                <span class="tool-item">Java Spring Boot</span>
-                                <span class="tool-item">Python</span>
-                                <span class="tool-item">PHP</span>
-                            </div>
-                            <button class="ui-btn">
-                                <span>
-                                  Backend
-                                </span>
-                              </button>
-                        </div>
-                        <p class="card-description">Developing server-side logic, APIs, and application workflows to power web systems.</p>
-                    </div>
-                </div>
-                <div class="work-card three">
-                    <div class="card-number">03</div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="tech-names">
-                                <span class="tool-item">PostgreSQL</span>
-                                <span class="tool-item">MySQL</span>
-                                <span class="tool-item">Firebase</span>
-                                <span class="tool-item">SQLite</span>
-                            </div>
-                            <button class="ui-btn">
-                                <span>
-                                  Databases
-                                </span>
-                              </button>
-                        </div>
-                        <p class="card-description">Managing and structuring data for reliable storage, retrieval, and scalability.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <p class="section-kicker section-kicker-centered">04 / Let’s build</p>
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="business-card">
-                    <div class="card-left">
-                        <div class="profile-image-placeholder">
-                            <img src="images/portrait.webp" alt="Kurt Ian Bernaldez" class="profile-image" loading="lazy" decoding="async" width="160" height="160">
-                        </div>
-                    </div>
-                    <div class="card-right">
-                        <div class="card-header">
-                            <div class="card-name-title">
-                                <h3 class="card-name">Kurt Ian Bernaldez</h3>
-                                <p class="card-title">Full-Stack Developer</p>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
-                                    </svg>
-                                </div>
-                                <div class="contact-details">
-                                    <span class="contact-label">Email</span>
-                                    <a href="mailto:bernaldezkurtian@gmail.com" class="contact-value">bernaldezkurtian@gmail.com</a>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/>
-                                    </svg>
-                                </div>
-                                <div class="contact-details">
-                                    <span class="contact-label">Phone</span>
-                                    <a href="tel:+639942341029" class="contact-value">(+63) 994-234-1029</a>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
-                                    </svg>
-                                </div>
-                                <div class="contact-details">
-                                    <span class="contact-label">Location</span>
-                                    <span class="contact-value">Cebu, Minglanilla</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="social-links-container">
-                                <a href="https://www.linkedin.com/in/kurt-ian-bernaldez-a79a5b2b5/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" fill="currentColor"/>
-                                    </svg>
-                                </a>
-                                <a href="https://github.com/kurtianbernaldez" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" fill="currentColor"/>
-                                    </svg>
-                                </a>
-                                <a href="https://www.instagram.com/kvisuals.dev/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="currentColor"/>
-                                    </svg>
-                                </a>
+                    <div class="profile-body">
+                        <figure class="portrait-figure" data-reveal>
+                            <div class="portrait-frame"><img class="profile-photo" src="images/portrait.webp" alt="Kurt Ian Bernaldez" width="400" height="418" fetchpriority="high"></div>
+                            <figcaption><span>01 / PROFILE</span><span>Based in Cebu, PH</span></figcaption>
+                        </figure>
+                        <div class="profile-copy" data-reveal>
+                            <p class="intro-copy">I build <strong>practical web products</strong> with clear interfaces and dependable systems. My work spans ecommerce, booking workflows, and the admin tools that keep things running.</p>
+                            <p class="intro-copy">From the first screen to the backend details, I enjoy turning complex workflows into something simple to use.</p>
+                            <div class="profile-actions"><a class="button button-primary" href="projects.html">Explore my work <span aria-hidden="true">↗</span></a><a class="text-link" href="mailto:bernaldezkurtian@gmail.com">Contact me</a></div>
+                            <div class="social-links" aria-label="Social profiles">
+                                <a href="https://github.com/kurtianbernaldez" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                                <a href="https://www.linkedin.com/in/kurt-ian-bernaldez-a79a5b2b5/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+                                <a href="https://www.instagram.com/kvisuals.dev/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                    <div class="profile-meta"><span>Code, interfaces &amp; everything between</span><span>Cebu, Minglanilla</span></div>
+                </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Kurt Ian Bernaldez. All rights reserved.</p>
-        </div>
-    </footer>
+                <section class="content-section selected-section" aria-labelledby="projects-title" data-reveal>
+                    <div class="section-heading">
+                        <div><p class="section-kicker">02 / Selected work</p><h2 id="projects-title">A few things I’ve built</h2></div>
+                        <a class="section-link" href="projects.html">See all projects <span aria-hidden="true">↗</span></a>
+                    </div>
+                    <div class="featured-grid">
+                        <a class="featured-project featured-project--stamped" href="projects.html#project-stamped">
+                            <span class="featured-index">01</span><img src="images/stamped.png" alt="" width="72" height="72" loading="lazy">
+                            <div><p class="project-type">Document workflow web app</p><h3>Stamped</h3><p>Digital stamping, records, and approvals in one workspace.</p></div><span class="project-arrow" aria-hidden="true">↗</span>
+                        </a>
+                        <a class="featured-project featured-project--styles" href="projects.html#project-design-style-mds">
+                            <span class="featured-index">02</span><img src="images/design-style-mds.svg" alt="" width="72" height="72" loading="lazy">
+                            <div><p class="project-type">Design reference web app</p><h3>Design Style MDS</h3><p>Design.md references for different visual styles.</p></div><span class="project-arrow" aria-hidden="true">↗</span>
+                        </a>
+                        <a class="featured-project featured-project--deskmux" href="projects.html#project-deskmux">
+                            <span class="featured-index">03</span><img src="images/deskmux-logo.png" alt="" width="72" height="72" loading="lazy">
+                            <div><p class="project-type">App multiplexer</p><h3>Deskmux</h3><p>One place to access and switch between apps.</p></div><span class="project-arrow" aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </section>
 
-    <!-- Preload critical scripts (loads in background, doesn't block) -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
-    <link rel="preload" href="scripts/main.js" as="script">
-    
-    <!-- Load scripts with defer: loads in parallel but executes in order after DOM is ready -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-    <script src="scripts/main.js" defer></script>
-    <script src="scripts/projects.js" defer></script>
-    <script src="scripts/animations.js" defer></script>
+                <section class="content-section" aria-labelledby="experience-title" data-reveal>
+                    <div class="section-heading">
+                        <div><p class="section-kicker">02 / Experience</p><h2 id="experience-title">Where I’ve been working</h2></div>
+                        <a class="section-link" href="experience.html">Full history <span aria-hidden="true">↗</span></a>
+                    </div>
+                    <ol class="experience-preview">
+                        <li><a class="experience-preview-link" href="experience.html"><time datetime="2026-09">2026 — Now</time><div><h3>IT Support</h3><p>Six Eleven Global Services and Solutions</p></div><span class="list-arrow" aria-hidden="true">↗</span></a></li>
+                        <li><a class="experience-preview-link" href="experience.html"><time datetime="2024">2024 — 2026</time><div><h3>Freelance Web Developer</h3><p>Client websites &amp; web applications</p></div><span class="list-arrow" aria-hidden="true">↗</span></a></li>
+                    </ol>
+                </section>
+
+                <section class="content-section stack-preview" aria-labelledby="stack-title" data-reveal>
+                    <div class="section-heading">
+                        <div><p class="section-kicker">04 / Tools of the trade</p><h2 id="stack-title">My everyday stack</h2></div>
+                        <a class="section-link" href="stack.html">Browse the stack <span aria-hidden="true">↗</span></a>
+                    </div>
+                    <ul class="stack-tags"><li>Laravel</li><li>PHP</li><li>React</li><li>Next.js</li><li>TypeScript</li><li>MySQL</li><li>Tailwind CSS</li><li>Firebase</li></ul>
+                </section>
+
+                <section class="contact-panel" id="contact" aria-labelledby="contact-title" data-reveal>
+                    <div><p class="section-kicker">Have something in mind?</p><h2 id="contact-title">Let’s make it useful.</h2><p>For project ideas, work, or just a hello — my inbox is open.</p></div>
+                    <div class="contact-panel-details"><a class="contact-email" href="mailto:bernaldezkurtian@gmail.com">bernaldezkurtian@gmail.com <span aria-hidden="true">↗</span></a><div><a href="tel:+639942341029">(+63) 994-234-1029</a><span>Cebu, Minglanilla</span></div></div>
+                </section>
+            </main>
+            <footer class="site-footer"><p>© 2026 Kurt Ian Bernaldez</p><p>Made with care, in Cebu.</p></footer>
+        </div>
+    </div>
 </body>
 </html>
-
